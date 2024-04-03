@@ -1,0 +1,45 @@
+ /*
+Copyright (C) 2023 DigiPen Institute of Technology
+Reproduction or distribution of this file or its contents without
+prior written consent is prohibited
+File Name:  Mode1.cpp
+Project:    CS230 Engine
+Author:     Jonathan Holmes
+Created:    March 8, 2023
+*/
+
+#include "../Engine/Engine.h"
+#include "States.h"
+#include "Mode1.h"
+
+
+Mode1::Mode1() : hen_side({ 300, floor }) { }
+
+void Mode1::Load() {
+    background.Load("Assets/Background.png");
+    hen_side.Load();
+}
+
+void Mode1::Update([[maybe_unused]] double dt) {
+    hen_side.Update(dt);
+    if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::One)) {
+        Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Mode2));
+    }
+    if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Two))
+    {
+        Engine::GetGameStateManager().ClearNextGameState();
+    }
+    if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::R)) {
+        Engine::GetGameStateManager().ReloadGameState();
+    }
+
+}
+
+void Mode1::Draw() {
+    Engine::GetWindow().Clear(0x00F0F0FF);
+
+    background.Draw({ 0, 0 });
+    hen_side.Draw();
+}
+
+void Mode1::Unload() { }
