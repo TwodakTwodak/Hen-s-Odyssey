@@ -1,3 +1,0 @@
-C:\GitHub\Hen-s-Odyssey\Hen's Odyssey\x64\Debug\Hen's Odyssey.vcxproj.CopyComplete
-C:\GitHub\Hen-s-Odyssey\Hen's Odyssey\x64\Debug\Hen's Odyssey.exe
-C:\GitHub\Hen-s-Odyssey\Hen's Odyssey\x64\Debug\raylib.dll
