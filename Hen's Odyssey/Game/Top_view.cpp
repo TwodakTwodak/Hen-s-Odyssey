@@ -179,11 +179,11 @@ void Hen_top::Update(double dt) {
         {
             if (position.x < object.GivePosition().x)
             {
-                position.x = 250;
+                position.x = object.GivePosition().x-100;
             }
             else
             {
-                position.x = 450;
+                position.x = object.GivePosition().x+100;
             }
         }
         else if(current_new == 0 || current_new == 2)
