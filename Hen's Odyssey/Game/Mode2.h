@@ -12,6 +12,8 @@ Created:    March 8, 2023
 #include "../Engine/GameState.h"
 #include "../Engine/Sprite.h"
 #include "Top_view.h"
+#include "Object.h"
+#include "Hen.h"
 
 class Mode2 : public CS230::GameState {
 public:
@@ -27,4 +29,6 @@ public:
 
 private:
     Hen_top hen_top;
+    Object object;
+    Hen hen;
 };

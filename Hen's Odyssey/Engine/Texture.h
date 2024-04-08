@@ -25,7 +25,9 @@ namespace CS230 {
         Texture& operator=(Texture&& temporary) noexcept;
 
         void Load(const std::filesystem::path& file_name);
-        void Draw(Math::vec2 location);
+        void DrawBaseXY(Math::vec2 location);
+        void DrawBaseXZ(Math::vec2 location);
+        void DrawCollisionScope(double x, double y, double width, double height);
         Math::ivec2 GetSize() const;
 
     private:

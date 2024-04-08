@@ -11,9 +11,13 @@ Created:    March 8, 2023
 #include "../Engine/Engine.h"
 #include "States.h"
 #include "Mode1.h"
+#include "iostream"
 
-
-Mode1::Mode1() : hen_side({ 300, floor }) { }
+Mode1::Mode1() : 
+    hen_side({ hen.GivePosition().x, 250, floor }), 
+    object(), hen()
+{
+}
 
 void Mode1::Load() {
     background.Load("Assets/Background.png");
@@ -38,7 +42,7 @@ void Mode1::Update([[maybe_unused]] double dt) {
 void Mode1::Draw() {
     Engine::GetWindow().Clear(0x00F0F0FF);
 
-    background.Draw({ 0, 0 });
+    background.DrawBaseXZ({ 0, 0, 0 });
     hen_side.Draw();
 }
 

@@ -11,19 +11,20 @@ Created:    March 8, 2023
 #pragma once
 #include "..\Engine\Sprite.h"
 #include "..\Engine\Vec2.h"
+#include "..\Engine\Rect.h"
 
 class Hen {
 public: 
-    Hen(Math::vec2 start_position);
-    void Load();
-    void Update(double dt);
-    void Draw();
-
+    void GetVelocity(Math::vec2 get_velocity);
+    Math::vec2 GiveVelocity();
+    void GetPosition(Math::vec2 get_position);
+    Math::vec2 GivePosition();
+    void RectChange(Math::ivec2 hen_size);
+    Math::rect GiveCollisionRect();
 private:
     CS230::Sprite sprite;
-    Math::vec2 start_position;
-    Math::vec2 position;
+    Math::vec2 position = {100, 300, 80 };
     Math::vec2 velocity;
-
-    static constexpr double bounce_velocity = 500;
+    Math::rect collision_rect;
 };
+

@@ -24,7 +24,7 @@ bool CS230::Window::IsClosed() const {
 
 Math::ivec2 CS230::Window::GetSize() const
 {
-    return Math::ivec2::ivec2(default_width, default_height);
+    return Math::ivec2::ivec2(default_width, default_height, 0);
 }
 
 void CS230::Window::Update() {
@@ -34,7 +34,7 @@ void CS230::Window::Update() {
     int current_height = GetScreenHeight();
     if (current_width != size.x || current_height != size.y) {
         Engine::GetLogger().LogEvent("Window Resized");
-        size = { current_width, current_height };
+        size = { current_width, current_height, 0 };
     }
 
     BeginDrawing();

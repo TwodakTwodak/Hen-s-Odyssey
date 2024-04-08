@@ -15,9 +15,10 @@ namespace Math {
     struct vec2 {
         double x{ 0.0 };
         double y{ 0.0 };
+        double z{ 0.0 };
 
         vec2() = default;
-        vec2(double x, double y) : x(x), y(y) {}
+        vec2(double x, double y, double z) : x(x), y(y), z(z) {}
 
         bool operator==(const vec2& v);
         bool operator!=(const vec2& v);
@@ -40,11 +41,12 @@ namespace Math {
     struct ivec2 {
         int x{ 0 };
         int y{ 0 };
+        int z{ 0 };
 
         ivec2() = default;
-        ivec2(int x, int y) : x(x), y(y) {};
+        ivec2(int x, int y, int z) : x(x), y(y), z(z) {};
         explicit operator vec2() {
-            return vec2{ static_cast<double>(x),static_cast<double>(y) };
+            return vec2{ static_cast<double>(x),static_cast<double>(y), static_cast<double>(z) };
         }
 
         bool operator==(const ivec2& v);

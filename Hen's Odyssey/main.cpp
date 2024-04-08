@@ -17,9 +17,6 @@ int main() {
     Engine& engine = Engine::Instance();
     engine.Start("Hen's Odyssaey");
 
-    Math::vec2 a = { 10.1, 54.4 };
-    Math::vec2 b = { 12.7, 39 };
-    Math::vec2 c = a - b; 
 
     Splash splash;
     engine.GetGameStateManager().AddGameState(splash);

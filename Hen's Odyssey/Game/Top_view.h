@@ -4,6 +4,9 @@
 #include "..\Engine\Vec2.h"
 #include "..\Engine\Rect.h"
 #include "..\Engine\Collision.h"
+#include "..\Engine\Window.h"
+#include "Hen.h"
+#include "Object.h"
 
 class Hen_top {
 public:
@@ -13,12 +16,14 @@ public:
     void Draw();
 
 private:
-    Math::vec2 start_position = {0, 0};
     CS230::Sprite sprite;
-    Math::vec2 position = { 0, 0};
     Collision collision;
-
+    CS230::Window window;
+    Math::vec2 position;
     Math::vec2 velocity;
+    Hen hen;
+    //std::vector<Object> objects;
+    Object object;
 
     static constexpr double velocity_speed = 200;
 

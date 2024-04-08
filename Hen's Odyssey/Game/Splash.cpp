@@ -26,7 +26,7 @@ void Splash::Load() {
 void Splash::Draw() {
     Engine::GetWindow().Clear(UINT_MAX);
 
-    texture.Draw({ (Engine::GetWindow().GetSize() - texture.GetSize()) / 2.0 });
+    texture.DrawBaseXY({ (Engine::GetWindow().GetSize() - texture.GetSize()) / 2.0 });
 }
 
 

@@ -1,32 +1,39 @@
-#pragma once
 #include "Hen.h"
-#include "../Engine/Engine.h"
-#include "Mode1.h"
+#include "iostream"
+Math::vec2 hen_position = { 100, 300, 80 };
+Math::vec2 hen_velocity = { 0, 0, 0 };
 
-
-Hen::Hen(Math::vec2 start_position) :
-    start_position(start_position),
-    position(start_position)
-{}
-
-void Hen::Load() {
-    sprite .Load("Assets/Asteroid.png", { 70, 3 });
-    position.x = start_position.x;
-    position.y = start_position.y;
-    velocity.x = 0;
-    velocity.y = 0; 
+void Hen::GetVelocity(Math::vec2 get_velocity)
+{
+	hen_velocity = get_velocity;
 }
 
-void Hen::Draw() {
-    sprite.Draw(position);
+Math::vec2 Hen::GiveVelocity()
+{
+	return hen_velocity;
 }
 
-void Hen::Update(double dt) {
-    velocity.y -= Mode1::gravity * dt;
-    position += velocity * dt;
+void Hen::GetPosition(Math::vec2 get_position)
+{
+	hen_position = get_position;
+}
 
-    if (position.y < Mode1::floor) {
-        position.y = Mode1::floor;
-        velocity.y = bounce_velocity;
-    }
+Math::vec2 Hen::GivePosition()
+{
+	return hen_position;
+}
+
+void Hen::RectChange(Math::ivec2 hen_size)
+{
+	collision_rect = { 
+		{hen_position.x + hen_size.x / 2, 600 - (hen_position.y+ hen_size.y / 2), 600 - (hen_position.z + hen_size.z / 2) },
+		{hen_position.x - hen_size.x / 2, 600 - (hen_position.y - hen_size.y / 2), 600 - (hen_position.z - hen_size.z / 2)},
+	};
+}
+
+
+
+Math::rect Hen::GiveCollisionRect()
+{
+	return collision_rect;
 }

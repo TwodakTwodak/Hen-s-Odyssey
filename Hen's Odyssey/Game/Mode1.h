@@ -32,4 +32,6 @@ public:
 private:
     CS230::Texture background;
     Hen_side hen_side;
+    Hen hen;
+    Object object;
 };

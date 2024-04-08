@@ -12,6 +12,8 @@ Created:    March 8, 2023
 #include "..\Engine\Sprite.h"
 #include "..\Engine\Input.h"
 #include "..\Engine\Vec2.h"
+#include "Hen.h"
+#include "Object.h"
 
 class Hen_side {
 public:
@@ -25,6 +27,8 @@ private:
     Math::vec2 start_position; 
     Math::vec2 position;
     Math::vec2 velocity;
+    Hen hen;
+    Object object;
 
     bool jumping = false;
     bool going_up = false;

@@ -10,7 +10,7 @@ Created:    March 8, 2023
 
 #include "Texture.h"
 #include "Engine.h"
-
+#include "Rect.h"
 
 
 void CS230::Texture::Load(const std::filesystem::path& file_name) {
@@ -26,13 +26,24 @@ void CS230::Texture::Load(const std::filesystem::path& file_name) {
 
 Math::ivec2 CS230::Texture::GetSize() const {
     
-    return { texture.width, texture.height };
+    return { texture.width, texture.height, 0 };
 }
 
-void CS230::Texture::Draw(Math::vec2 location) {
+void CS230::Texture::DrawBaseXY(Math::vec2 location) {
     location.y *= -1;
     location.y += Engine::GetWindow().GetSize().y - texture.height;
     DrawTexture(texture, int(location.x), int(location.y), WHITE);
+}
+
+void CS230::Texture::DrawBaseXZ(Math::vec2 location) {
+    location.z *= -1;
+    location.z += Engine::GetWindow().GetSize().y - texture.height;
+    DrawTexture(texture, int(location.x), int(location.z), WHITE);
+}
+
+
+void CS230::Texture::DrawCollisionScope(double x, double y, double width, double height) {
+    DrawRectangleLines(x, y, width, height, WHITE);
 }
 
 CS230::Texture::Texture() { }

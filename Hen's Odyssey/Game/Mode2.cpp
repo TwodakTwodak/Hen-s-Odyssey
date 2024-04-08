@@ -14,7 +14,7 @@ Created:    March 8, 2023
 
 
 
-Mode2::Mode2() : hen_top({ 0, 0 }) { }
+Mode2::Mode2() : hen_top({ 0, 0, 0}), object() { }
 
 void Mode2::Load() {
     hen_top.Load();
@@ -38,8 +38,7 @@ void Mode2::Update(double dt) {
 void Mode2::Draw() {
     Engine::GetWindow().Clear(0x000000FF);
     hen_top.Draw();
+    
 }
 
-void Mode2::Unload() {
-
-}
+void Mode2::Unload() { }
