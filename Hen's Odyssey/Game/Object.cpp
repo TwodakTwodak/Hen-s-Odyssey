@@ -5,6 +5,9 @@
 #include "..\Engine\Rect.h"
 #include "iostream"
 
+Math::vec2 position = { 350, 250, 80 };
+Math::vec2 velocity = { 0, 0, 0 };
+
 void Object::Load() {
     sprite.Load("Assets/Object.png", { 0, 0, 0 });
     velocity.x = 0;
@@ -48,4 +51,9 @@ void Object::GetPosition(Math::vec2 get_position)
 Math::ivec2 Object::GiveSize()
 {
     return sprite.GetTextureSize();
+}
+
+bool Object::GiveObjectMovemence()
+{
+    return moving_object;
 }

@@ -14,9 +14,9 @@ public:
     void GetPosition(Math::vec2 get_position);
     Math::ivec2 GiveSize();
     void RectChange();
+    bool GiveObjectMovemence();
 private:
     CS230::Sprite sprite;
-    Math::vec2 position= { 350, 250, 80 };
-    Math::vec2 velocity;
     Math::rect object_rect;
+    bool moving_object = true;
 };

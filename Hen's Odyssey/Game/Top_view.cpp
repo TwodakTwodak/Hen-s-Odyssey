@@ -173,28 +173,82 @@ void Hen_top::Update(double dt) {
     hen.PreRectChange(sprite.GetTextureSize(), velocity.x* dt, velocity.y* dt, 0);
     if (collision.CollisionCheck(hen.PreGiveCollisionRect(), object.GiveCollisionRect()))
     {
-        if (current_new == 1 || current_new == 3)
+        if (object.GiveObjectMovemence())
         {
-            if (position.x + sprite.GetTextureSize().x < object.GivePosition().x + object.GiveSize().x / 2)
+            position += velocity * dt;
+            if (current_new == 1 || current_new == 3)
             {
-                position.x = object.GivePosition().x - sprite.GetTextureSize().x;
+                if (velocity.x > 0)
+                {
+                    object.GetPosition({ position.x + sprite.GetTextureSize().x, object.GivePosition().y , object.GivePosition().z });
+                }
+                else if (velocity.x < 0)
+                {
+                    object.GetPosition({ position.x - object.GiveSize().x, object.GivePosition().y , object.GivePosition().z });
+                }
+                else
+                {
+                    if (position.x + sprite.GetTextureSize().x < object.GivePosition().x + object.GiveSize().x / 2)
+                    {
+                        object.GetPosition({ position.x + sprite.GetTextureSize().x, object.GivePosition().y , object.GivePosition().z });
+
+                    }
+                    else
+                    {
+                        object.GetPosition({ position.x - object.GiveSize().x, object.GivePosition().y , object.GivePosition().z });
+                    }
+                }
             }
-            else
+            else if (current_new == 0 || current_new == 2)
             {
-                position.x = object.GivePosition().x + object.GiveSize().x;
+                if (velocity.y > 0)
+                {
+                    object.GetPosition({ object.GivePosition().x, position.y + sprite.GetTextureSize().y , object.GivePosition().z });
+                }
+                else if(velocity.y < 0)
+                {
+                    object.GetPosition({ object.GivePosition().x , position.y - object.GiveSize().y , object.GivePosition().z });
+                }
+                else
+                {
+                    if (position.y + sprite.GetTextureSize().y < object.GivePosition().y + object.GiveSize().y / 2)
+                    {
+                        object.GetPosition({ object.GivePosition().x, position.y + sprite.GetTextureSize().y , object.GivePosition().z });
+                    }
+                    else
+                    {
+                        object.GetPosition({ object.GivePosition().x , position.y - object.GiveSize().y , object.GivePosition().z });
+                    }
+                }
+            }
+            object.RectChange();
+        }
+        else
+        {
+            if (current_new == 1 || current_new == 3)
+            {
+                if (position.x + sprite.GetTextureSize().x < object.GivePosition().x + object.GiveSize().x / 2)
+                {
+                    position.x = object.GivePosition().x - sprite.GetTextureSize().x;
+                }
+                else
+                {
+                    position.x = object.GivePosition().x + object.GiveSize().x;
+                }
+            }
+            else if (current_new == 0 || current_new == 2)
+            {
+                if (position.y + sprite.GetTextureSize().y < object.GivePosition().y + object.GiveSize().y / 2)
+                {
+                    position.y = object.GivePosition().y - sprite.GetTextureSize().y;
+                }
+                else
+                {
+                    position.y = object.GivePosition().y + object.GiveSize().y;
+                }
             }
         }
-        else if(current_new == 0 || current_new == 2)
-        {
-            if (position.y + sprite.GetTextureSize().y < object.GivePosition().y + object.GiveSize().y / 2)
-            {
-                position.y = object.GivePosition().y - sprite.GetTextureSize().y;
-            }
-            else
-            {
-                position.y = object.GivePosition().y + object.GiveSize().y;
-            }
-        }
+        
     }
     else
     {

@@ -25,8 +25,6 @@ public:
     Math::rect PreGiveCollisionRect();
 private:
     CS230::Sprite sprite;
-    Math::vec2 position = {100, 300, 80 };
-    Math::vec2 velocity;
     Math::rect collision_rect;
     Math::rect pre_collision_rect;
 };

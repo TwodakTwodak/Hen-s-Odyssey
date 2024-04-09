@@ -58,14 +58,44 @@ void Hen_side::Update(double dt) {
 	if (collision.CollisionCheck(hen.PreGiveCollisionRect(), object.GiveCollisionRect()))
 	{
 		Engine::GetLogger().LogDebug("\nCollision\n");
-		if (position.x+ sprite.GetTextureSize().x < object.GivePosition().x+object.GiveSize().x/2 )
+		if (object.GiveObjectMovemence())
 		{
-			position.x = object.GivePosition().x -sprite.GetTextureSize().x;
+			position.x += velocity.x * dt;
+			position.z += velocity.z * dt;
+			if (velocity.x > 0)
+			{
+				object.GetPosition({ position.x + sprite.GetTextureSize().x, object.GivePosition().y , object.GivePosition().z });
+			}
+			else if(velocity.x < 0)
+			{
+				object.GetPosition({ position.x - object.GiveSize().x, object.GivePosition().y , object.GivePosition().z });
+			}
+			else
+			{
+				if (position.x + sprite.GetTextureSize().x < object.GivePosition().x + object.GiveSize().x / 2)
+				{
+					object.GetPosition({ position.x + sprite.GetTextureSize().x, object.GivePosition().y , object.GivePosition().z });
+
+				}
+				else
+				{
+					object.GetPosition({ position.x - object.GiveSize().x, object.GivePosition().y , object.GivePosition().z });
+				}
+			}
 			
+			object.RectChange();
 		}
 		else
 		{
-			position.x = object.GivePosition().x + object.GiveSize().x;
+			if (position.x + sprite.GetTextureSize().x < object.GivePosition().x + object.GiveSize().x / 2)
+			{
+				position.x = object.GivePosition().x - sprite.GetTextureSize().x;
+
+			}
+			else
+			{
+				position.x = object.GivePosition().x + object.GiveSize().x;
+			}
 		}
 	}
 	else
