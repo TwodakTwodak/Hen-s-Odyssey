@@ -12,11 +12,11 @@ public:
     Math::rect GiveCollisionRect();
     Math::vec2 GivePosition();
     void GetPosition(Math::vec2 get_position);
+    Math::ivec2 GiveSize();
     void RectChange();
 private:
     CS230::Sprite sprite;
-    Math::vec2 start_position;
-    Math::vec2 position;
+    Math::vec2 position= { 350, 250, 80 };
     Math::vec2 velocity;
     Math::rect object_rect;
 };

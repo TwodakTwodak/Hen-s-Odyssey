@@ -14,6 +14,7 @@ Created:    March 8, 2023
 #include "..\Engine\Vec2.h"
 #include "Hen.h"
 #include "Object.h"
+#include "..\Engine\Collision.h"
 
 class Hen_side {
 public:
@@ -27,6 +28,7 @@ private:
     Math::vec2 start_position; 
     Math::vec2 position;
     Math::vec2 velocity;
+    Collision collision;
     Hen hen;
     Object object;
 

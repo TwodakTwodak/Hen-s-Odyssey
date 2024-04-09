@@ -11,7 +11,6 @@
 Hen_top::Hen_top(Math::vec2 start_position) :
     position(start_position), object()
 {
-    object.GetPosition({ 350, 250, 250 });
 }
 
 void Hen_top::Load() {
@@ -24,7 +23,6 @@ void Hen_top::Update(double dt) {
     position.x=hen.GivePosition().x;
     position.y = hen.GivePosition().y;
     velocity=hen.GiveVelocity();
-    std::cout << position.y << std::endl;
     if (Engine::GetInput().KeyJustPressed(CS230::Input::Keys::D)) //3
     {
         current_new = 3;
@@ -153,7 +151,7 @@ void Hen_top::Update(double dt) {
 
     Engine::GetLogger().LogDebug("Velocity: " + std::to_string(velocity.x) + ", " + std::to_string(velocity.y));
 
-    position += velocity * dt;
+    
     
     if (position.x < -sprite.GetTextureSize().x)
     {
@@ -172,32 +170,37 @@ void Hen_top::Update(double dt) {
         position.y = -sprite.GetTextureSize().y / 2;
     }
     //Test for wrap, here
-    
-    if (collision.CollisionCheck(hen.GiveCollisionRect(), object.GiveCollisionRect()))
+    hen.PreRectChange(sprite.GetTextureSize(), velocity.x* dt, velocity.y* dt, 0);
+    if (collision.CollisionCheck(hen.PreGiveCollisionRect(), object.GiveCollisionRect()))
     {
         if (current_new == 1 || current_new == 3)
         {
-            if (position.x < object.GivePosition().x)
+            if (position.x + sprite.GetTextureSize().x < object.GivePosition().x + object.GiveSize().x / 2)
             {
-                position.x = object.GivePosition().x-100;
+                position.x = object.GivePosition().x - sprite.GetTextureSize().x;
             }
             else
             {
-                position.x = object.GivePosition().x+100;
+                position.x = object.GivePosition().x + object.GiveSize().x;
             }
         }
         else if(current_new == 0 || current_new == 2)
         {
-            if (position.y < object.GivePosition().y)
+            if (position.y + sprite.GetTextureSize().y < object.GivePosition().y + object.GiveSize().y / 2)
             {
-                position.y = object.GivePosition().y - 100;
+                position.y = object.GivePosition().y - sprite.GetTextureSize().y;
             }
             else
             {
-                position.y = object.GivePosition().y + 100;
+                position.y = object.GivePosition().y + object.GiveSize().y;
             }
         }
     }
+    else
+    {
+        position += velocity * dt;
+    }
+    
     hen.GetPosition(position);
     hen.GetVelocity(velocity);
     hen.RectChange(sprite.GetTextureSize());
@@ -213,8 +216,34 @@ void Hen_top::Update(double dt) {
 
 void Hen_top::Draw() {
     object.DrawBaseXY();
-    sprite.DrawBaseXY({ position.x, position.y, position.z});
-    sprite.DrawCollisionScope(position.x, 600 - (position.y + sprite.GetTextureSize().y), sprite.GetTextureSize().x, sprite.GetTextureSize().y);
-    
-
+    sprite.DrawBaseXY(position);
+    sprite.DrawCollisionScope(position.x, 600 - (position.y), sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
 }
+
+/*
+* if (collision.CollisionCheck(hen.GiveCollisionRect(), object.GiveCollisionRect()))
+    {
+        if (current_new == 1 || current_new == 3)
+        {
+            if (position.x <= object.GivePosition().x)
+            {
+                position.x = object.GivePosition().x-100;
+            }
+            else
+            {
+                position.x = object.GivePosition().x+100;
+            }
+        }
+        else if(current_new == 0 || current_new == 2)
+        {
+            if (position.y <= object.GivePosition().y)
+            {
+                position.y = object.GivePosition().y - 100;
+            }
+            else
+            {
+                position.y = object.GivePosition().y + 100;
+            }
+        }
+    }
+*/

@@ -14,7 +14,7 @@ Created:    March 8, 2023
 #include "iostream"
 
 Mode1::Mode1() : 
-    hen_side({ hen.GivePosition().x, 250, floor }), 
+    hen_side({ hen.GivePosition().x, hen.GivePosition().y, floor }),
     object(), hen()
 {
 }

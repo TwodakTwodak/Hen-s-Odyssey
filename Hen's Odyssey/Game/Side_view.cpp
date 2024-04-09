@@ -13,7 +13,6 @@ Created:    March 8, 2023
 #include "../Engine/Engine.h"
 #include "Mode1.h"
 #include "iostream"
-
 //x, z
 
 Hen_side::Hen_side(Math::vec2 start_position) :
@@ -25,7 +24,8 @@ Hen_side::Hen_side(Math::vec2 start_position) :
 }
 
 void Hen_side::Load() {
-    sprite.Load("Assets/Cat.png", { 64, 0, 15 });
+    sprite.Load("Assets/Cat.png", { 0, 0, 0 });
+	object.Load();
 	velocity.x = 0;
 	velocity.y = 0;
 	velocity.z = 0;
@@ -38,6 +38,8 @@ void Hen_side::Update(double dt) {
 	position.x = hen.GivePosition().x;
 	position.z = hen.GivePosition().z;
 	velocity = hen.GiveVelocity();
+	hen.RectChange(sprite.GetTextureSize());
+	object.RectChange();
 	if (Engine::GetInput().KeyDown(CS230::Input::Keys::D)) {
 		velocity.x = velocity_speed;
 	}
@@ -49,15 +51,37 @@ void Hen_side::Update(double dt) {
 	{
 		velocity.x = 0;
 	}
-	position.x += velocity.x * dt;
-	position.z += velocity.z * dt;
+	
+	hen.PreRectChange(sprite.GetTextureSize(), velocity.x * dt, 0, velocity.z * dt);
+	//std::cout << position.x << " " << object.GivePosition().x << " " << sprite.GetTextureSize().x << std::endl;
+	//std::cout << position.z << " " << object.GivePosition().z << " " << sprite.GetTextureSize().y << std::endl;
+	if (collision.CollisionCheck(hen.PreGiveCollisionRect(), object.GiveCollisionRect()))
+	{
+		Engine::GetLogger().LogDebug("\nCollision\n");
+		if (position.x+ sprite.GetTextureSize().x < object.GivePosition().x+object.GiveSize().x/2 )
+		{
+			position.x = object.GivePosition().x -sprite.GetTextureSize().x;
+			
+		}
+		else
+		{
+			position.x = object.GivePosition().x + object.GiveSize().x;
+		}
+	}
+	else
+	{
+		position.x += velocity.x * dt;
+		position.z += velocity.z * dt;
+	}
+	
+	
 	hen.GetPosition(position);
 	hen.GetVelocity(velocity);
 	hen.RectChange(sprite.GetTextureSize());
-	std::cout << position.z << std::endl;
 }
 
-
 void Hen_side::Draw() {
-	sprite.DrawBaseXZ({ position});
+	object.DrawBaseXZ();
+	sprite.DrawBaseXZ(position);
+	sprite.DrawCollisionScope(position.x, 600 - (position.z), sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
 }
