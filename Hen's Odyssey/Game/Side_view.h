@@ -1,13 +1,3 @@
- /*
-Copyright (C) 2023 DigiPen Institute of Technology
-Reproduction or distribution of this file or its contents without
-prior written consent is prohibited
-File Name:  Cat.h
-Project:    CS230 Engine
-Author:     Jonathan Holmes
-Created:    March 8, 2023
-*/
-
 #pragma once
 #include "..\Engine\Sprite.h"
 #include "..\Engine\Input.h"
@@ -15,6 +5,7 @@ Created:    March 8, 2023
 #include "Hen.h"
 #include "Object.h"
 #include "..\Engine\Collision.h"
+#include "Stair.h"
 
 class Hen_side {
 public:
@@ -31,13 +22,12 @@ private:
     Collision collision;
     Hen hen;
     Object object;
+    Stair stair;
 
     bool jumping = false;
     bool going_up = false;
 
     static constexpr double velocity_speed = 200;
-
-    int room = 1;
 
     bool hen_move = true;
     bool object_move = true;

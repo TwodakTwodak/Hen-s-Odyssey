@@ -17,11 +17,13 @@ Created:    March 8, 2023
 Mode2::Mode2() : hen_top({ 0, 0, 0}), object() { }
 
 void Mode2::Load() {
+    background.Load("Assets/TopGroundGrass.png");
     hen_top.Load();
 }
 
 void Mode2::Update(double dt) {
     hen_top.Update(dt);
+    stair.Update(dt);
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Two))
     {
         Engine::GetGameStateManager().ClearNextGameState();
@@ -35,19 +37,16 @@ void Mode2::Update(double dt) {
     }
 
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Up)) {
-        hen_top.CheckRoom(1);
-        object.GetPosition({ 450, 300, 80 });
-        object.GetObjectMovemence(true);
+        stair.RoomChange(1);
     }
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down)) {
-        hen_top.CheckRoom(2);
-        object.GetPosition({ 350, 250, 80 });
-        object.GetObjectMovemence(false);
+        stair.RoomChange(2);
     }
 }
 
 void Mode2::Draw() {
     Engine::GetWindow().Clear(0x000000FF);
+    background.DrawBaseXY({ 0, 0, 0 });
     hen_top.Draw();
     
 }

@@ -14,15 +14,15 @@ Hen_top::Hen_top(Math::vec2 start_position) :
 }
 
 void Hen_top::Load() {
-    sprite.Load("Assets/Ship.png", { 0, 0, 0});
+    sprite.Load("Assets/TopHen.png", { 0, 0, 0});
     position = hen.GivePosition();
     object.Load();
 }
 
 void Hen_top::Update(double dt) {
     hen_move = true;
-    if (room == 1) object.GetObjectMovemence(false);
-    if (room == 2) object.GetObjectMovemence(true);
+    if (stair.GiveRoom() == 1) object.GetObjectMovemence(false);
+    if (stair.GiveRoom() == 2) object.GetObjectMovemence(true);
     position.x=hen.GivePosition().x;
     position.y = hen.GivePosition().y;
     velocity=hen.GiveVelocity();
@@ -307,18 +307,6 @@ void Hen_top::Update(double dt) {
 void Hen_top::Draw() {
     object.DrawBaseXY();
     sprite.DrawBaseXY(position);
-    sprite.DrawCollisionScope(position.x, 600 - (position.y), sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
+    sprite.DrawCollisionScope(position.x, Engine::GetWindow().GetSize().y - (position.y), sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
 }
 
-
-void Hen_top::CheckRoom(int get_room)
-{
-    if (get_room == 1 && room != 2)
-    {
-        room++;
-    }
-    else if (get_room == 2 && room != 1)
-    {
-        room--;
-    }
-}

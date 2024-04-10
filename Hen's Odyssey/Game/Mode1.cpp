@@ -20,12 +20,13 @@ Mode1::Mode1() :
 }
 
 void Mode1::Load() {
-    background.Load("Assets/Background.png");
+    background.Load("Assets/SideBackground.png");
     hen_side.Load();
 }
 
 void Mode1::Update([[maybe_unused]] double dt) {
     hen_side.Update(dt);
+    stair.Update(dt);
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::One)) {
         Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Mode2));
     }
@@ -37,14 +38,10 @@ void Mode1::Update([[maybe_unused]] double dt) {
         Engine::GetGameStateManager().ReloadGameState();
     }
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Up)) {
-        hen_side.CheckRoom(1);
-        object.GetPosition({ 450, 300, 80 });
-        object.GetObjectMovemence(true);
+        stair.RoomChange(1);
     }
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down)) {
-        hen_side.CheckRoom(2);
-        object.GetPosition({ 350, 250, 80 });
-        object.GetObjectMovemence(false);
+        stair.RoomChange(2);
     }
 }
 

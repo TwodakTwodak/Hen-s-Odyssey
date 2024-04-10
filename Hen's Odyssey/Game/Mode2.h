@@ -14,6 +14,7 @@ Created:    March 8, 2023
 #include "Top_view.h"
 #include "Object.h"
 #include "Hen.h"
+#include "Stair.h"
 
 class Mode2 : public CS230::GameState {
 public:
@@ -28,7 +29,9 @@ public:
     }
 
 private:
+    CS230::Texture background;
     Hen_top hen_top;
     Object object;
     Hen hen;
+    Stair stair;
 };

@@ -13,6 +13,7 @@ Created:    March 8, 2023
 #include "../Engine/Sprite.h"
 #include "Side_view.h"
 #include "Hen.h"
+#include "Stair.h"
 
 class Mode1 : public CS230::GameState {
 public:
@@ -34,4 +35,5 @@ private:
     Hen_side hen_side;
     Hen hen;
     Object object;
+    Stair stair;
 };

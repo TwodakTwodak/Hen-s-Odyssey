@@ -20,19 +20,19 @@ void Object::Update(double dt) {
 
 void Object::RectChange(){
     //std::cout << position.x - sprite.GetTextureSize().x/2 << " " << position.y - sprite.GetTextureSize().y/2 << std::endl;
-    object_rect = { {position.x + sprite.GetTextureSize().x, 600 - (position.y + sprite.GetTextureSize().y), 600 - (position.z + sprite.GetTextureSize().y) },
-        {position.x, 600 - position.y, 600 - position.z}
+    object_rect = { {position.x + sprite.GetTextureSize().x, Engine::GetWindow().GetSize().y - (position.y + sprite.GetTextureSize().y), Engine::GetWindow().GetSize().y - (position.z + sprite.GetTextureSize().y) },
+        {position.x, Engine::GetWindow().GetSize().y - position.y, Engine::GetWindow().GetSize().y - position.z}
     };
 }
 
 void Object::DrawBaseXY(){
     sprite.DrawBaseXY({ position});
-    sprite.DrawCollisionScope(position.x, 600 - position.y , sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
+    sprite.DrawCollisionScope(position.x, Engine::GetWindow().GetSize().y - position.y , sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
 }
 
 void Object::DrawBaseXZ() {
     sprite.DrawBaseXZ({ position});
-    sprite.DrawCollisionScope(position.x, 600 - position.z , sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
+    sprite.DrawCollisionScope(position.x, Engine::GetWindow().GetSize().y - position.z , sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
 }
 Math::rect Object::GiveCollisionRect()
 {
