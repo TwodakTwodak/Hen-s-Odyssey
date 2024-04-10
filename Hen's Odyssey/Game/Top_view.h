@@ -8,6 +8,7 @@
 #include "Hen.h"
 #include "Object.h"
 #include "Stair.h"
+#include "Button.h"
 
 class Hen_top {
 public:
@@ -25,7 +26,7 @@ private:
     //std::vector<Object> objects;
     Object object;
     Stair stair;
-    Object button;
+    Button button;
 
     static constexpr double velocity_speed = 200;
 
@@ -34,7 +35,7 @@ private:
     int key[4] = { 0, 0, 0, 0};
     int current_new = -1;
 
-
     bool hen_move = true;
     bool object_move = true;
+
 };

@@ -18,16 +18,18 @@ void Hen_top::Load() {
     position = hen.GivePosition();
     object.Load();
     stair.Load();
+    button.LoadXY();
 }
 
 void Hen_top::Update(double dt) {
     hen_move = true;
     if (stair.GiveRoom() == 1) object.GetObjectMovemence(false);
     if (stair.GiveRoom() == 2) object.GetObjectMovemence(true);
-    position.x=hen.GivePosition().x;
+    position.x = hen.GivePosition().x;
     position.y = hen.GivePosition().y;
     velocity=hen.GiveVelocity();
     stair.RectChange();
+    button.RectChange();
     if (Engine::GetInput().KeyJustPressed(CS230::Input::Keys::D)) //3
     {
         current_new = 3;
@@ -292,9 +294,19 @@ void Hen_top::Update(double dt) {
     {
         position += velocity * dt;
     }
-    if (collision.CollisionCheck(hen.PreGiveCollisionRect(), stair.GiveCollisionRect()))
+    if (collision.CollisionCheck(hen.PreGiveCollisionRect(), stair.GiveCollisionRect()) ) 
     {
-        stair.RoomChange(1);
+        if (stair.GiveRoom() == 2)
+        {
+            if (collision.CollisionCheck(button.GiveCollisionRect(), object.GiveCollisionRect()))
+            {
+                stair.RoomChange(1);
+            }
+        }
+        else 
+        {
+            stair.RoomChange(1);
+        }
     }
     
     hen.GetPosition(position);
@@ -311,6 +323,10 @@ void Hen_top::Update(double dt) {
 }
 
 void Hen_top::Draw() {
+    if (stair.GiveRoom() == 2)
+    {
+        button.DrawBaseXY();
+    }
     if (stair.GiveRoom() != 3)
     {
         object.DrawBaseXY();

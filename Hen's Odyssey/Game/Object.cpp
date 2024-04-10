@@ -12,7 +12,6 @@ void Object::Load() {
     sprite.Load("Assets/Box.png", { 0, 0, 0 });
     velocity.x = 0;
     velocity.y = 0;
-
 }
 
 void Object::Update(double dt) {

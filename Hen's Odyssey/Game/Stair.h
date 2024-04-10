@@ -6,6 +6,7 @@
 #include "Object.h"
 #include "..\Engine\Collision.h"
 #include "..\Engine\Rect.h"
+#include "Button.h"
 
 class Stair {
 public:
@@ -24,6 +25,7 @@ private:
     Collision collision;
     Hen hen;
     Object object;
+    Button button;
     Math::rect pre_collision_rect;
     
 };

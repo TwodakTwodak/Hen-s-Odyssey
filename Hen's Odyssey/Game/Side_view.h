@@ -6,6 +6,7 @@
 #include "Object.h"
 #include "..\Engine\Collision.h"
 #include "Stair.h"
+#include "Button.h"
 
 class Hen_side {
 public:
@@ -22,7 +23,7 @@ private:
     Hen hen;
     Object object;
     Stair stair;
-    Object button;
+    Button button;
 
     bool jumping = false;
     bool going_up = false;
