@@ -33,4 +33,6 @@ private:
     int current_new = -1;
 
     int room = 1;
+
+    bool hen_move = true;
 };

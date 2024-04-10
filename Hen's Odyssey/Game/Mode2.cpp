@@ -36,9 +36,13 @@ void Mode2::Update(double dt) {
 
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Up)) {
         hen_top.CheckRoom(1);
+        object.GetPosition({ 450, 300, 80 });
+        object.GetObjectMovemence(true);
     }
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down)) {
         hen_top.CheckRoom(2);
+        object.GetPosition({ 350, 250, 80 });
+        object.GetObjectMovemence(false);
     }
 }
 

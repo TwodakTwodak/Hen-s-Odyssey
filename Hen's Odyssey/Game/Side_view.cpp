@@ -35,6 +35,7 @@ void Hen_side::Load() {
 
 
 void Hen_side::Update(double dt) {
+	hen_move = true;
 	if (room == 1) object.GetObjectMovemence(false);
 	if (room == 2) object.GetObjectMovemence(true);
 	position.x = hen.GivePosition().x;
@@ -53,10 +54,32 @@ void Hen_side::Update(double dt) {
 	{
 		velocity.x = 0;
 	}
+
+	double vx = velocity.x * dt;
+	double vz = velocity.z * dt;
+
+	if (position.x + vx < 0)
+	{
+		position.x = 0;
+		hen_move = false;
+	}
+	if (position.x + vx + sprite.GetTextureSize().x > Engine::GetWindow().GetSize().x)
+	{
+		position.x = Engine::GetWindow().GetSize().x - sprite.GetTextureSize().x;
+		hen_move = false;
+	}
+	if (position.z + vz < 0)
+	{
+		position.z = 0;
+		hen_move = false;
+	}
+	if (position.z + vz + sprite.GetTextureSize().y > Engine::GetWindow().GetSize().y)
+	{
+		position.z = Engine::GetWindow().GetSize().y - sprite.GetTextureSize().y;
+		hen_move = false;
+	}
 	
 	hen.PreRectChange(sprite.GetTextureSize(), velocity.x * dt, 0, velocity.z * dt);
-	//std::cout << position.x << " " << object.GivePosition().x << " " << sprite.GetTextureSize().x << std::endl;
-	//std::cout << position.z << " " << object.GivePosition().z << " " << sprite.GetTextureSize().y << std::endl;
 	if (collision.CollisionCheck(hen.PreGiveCollisionRect(), object.GiveCollisionRect()))
 	{
 		Engine::GetLogger().LogDebug("\nCollision\n");
@@ -99,8 +122,10 @@ void Hen_side::Update(double dt) {
 				position.x = object.GivePosition().x + object.GiveSize().x;
 			}
 		}
+		hen_move = false;
 	}
-	else
+
+	if(hen_move)
 	{
 		position.x += velocity.x * dt;
 		position.z += velocity.z * dt;

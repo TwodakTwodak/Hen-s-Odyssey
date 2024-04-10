@@ -38,4 +38,6 @@ private:
     static constexpr double velocity_speed = 200;
 
     int room = 1;
+
+    bool hen_move = true;
 };

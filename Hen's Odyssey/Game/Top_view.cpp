@@ -20,6 +20,7 @@ void Hen_top::Load() {
 }
 
 void Hen_top::Update(double dt) {
+    hen_move = true;
     if (room == 1) object.GetObjectMovemence(false);
     if (room == 2) object.GetObjectMovemence(true);
     position.x=hen.GivePosition().x;
@@ -149,27 +150,32 @@ void Hen_top::Update(double dt) {
         DrawLine(0, j * 100, 800, j * 100, WHITE);
     }
     
-
+    double vx = velocity.x * dt;
+    double vy = velocity.y * dt;
 
     Engine::GetLogger().LogDebug("Velocity: " + std::to_string(velocity.x) + ", " + std::to_string(velocity.y));
 
     
     
-    if (position.x < -sprite.GetTextureSize().x)
+    if (position.x+vx < 0)
     {
-        position.x = sprite.GetTextureSize().x / 2 + Engine::GetWindow().GetSize().x;
+        position.x = 0;
+        hen_move = false;
     }
-    if (position.x > sprite.GetTextureSize().x + Engine::GetWindow().GetSize().x)
+    if (position.x+vx+ sprite.GetTextureSize().x > Engine::GetWindow().GetSize().x)
     {
-        position.x = -sprite.GetTextureSize().x / 2;
+        position.x = Engine::GetWindow().GetSize().x - sprite.GetTextureSize().x;
+        hen_move = false;
     }
-    if (position.y < -sprite.GetTextureSize().y)
+    if (position.y+vy < 0)
     {
-        position.y = sprite.GetTextureSize().y / 2 + Engine::GetWindow().GetSize().y;
+        position.y = 0;
+        hen_move = false;
     }
-    if (position.y > sprite.GetTextureSize().y+ Engine::GetWindow().GetSize().y)
+    if (position.y+vy + sprite.GetTextureSize().y > Engine::GetWindow().GetSize().y)
     {
-        position.y = -sprite.GetTextureSize().y / 2;
+        position.y = Engine::GetWindow().GetSize().y - sprite.GetTextureSize().y;
+        hen_move = false;
     }
     //Test for wrap, here
     hen.PreRectChange(sprite.GetTextureSize(), velocity.x* dt, velocity.y* dt, 0);
@@ -250,9 +256,11 @@ void Hen_top::Update(double dt) {
                 }
             }
         }
+        hen_move = false;
         
     }
-    else
+
+    if (hen_move)
     {
         position += velocity * dt;
     }
