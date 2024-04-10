@@ -39,8 +39,7 @@ void Hen_side::Load() {
 
 void Hen_side::Update(double dt) {
 	hen_move = true;
-	if (stair.GiveRoom() == 1) object.GetObjectMovemence(false);
-	if (stair.GiveRoom() == 2) object.GetObjectMovemence(true);
+	object.GetObjectMovemence(false);
 	position.x = hen.GivePosition().x;
 	position.z = hen.GivePosition().z;
 	velocity = hen.GiveVelocity();
