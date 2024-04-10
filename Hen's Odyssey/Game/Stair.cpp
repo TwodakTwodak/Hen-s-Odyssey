@@ -34,7 +34,6 @@ void Stair::Update(double dt)
 		}
 		if (room == 3)
 		{
-			object.GetPosition({ -100, -100, 100});
 			hen.GetPosition({ 100, 300, 80 });
 			object.GetObjectMovemence(false);
 		}

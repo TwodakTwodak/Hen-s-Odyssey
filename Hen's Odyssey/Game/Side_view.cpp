@@ -28,6 +28,7 @@ void Hen_side::Load() {
     sprite.Load("Assets/SideHen.png", { 0, 0, 0 });
 	object.Load();
 	stair.Load();
+	button.Load();
 	velocity.x = 0;
 	velocity.y = 0;
 	velocity.z = 0;
@@ -172,7 +173,10 @@ void Hen_side::Update(double dt) {
 }
 
 void Hen_side::Draw() {
-	object.DrawBaseXZ();
+	if (stair.GiveRoom() != 3)
+	{
+		object.DrawBaseXZ();
+	}
 	sprite.DrawBaseXZ(position);
 	sprite.DrawCollisionScope(position.x, Engine::GetWindow().GetSize().y - (position.z), sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
 }

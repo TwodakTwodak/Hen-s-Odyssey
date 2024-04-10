@@ -311,7 +311,10 @@ void Hen_top::Update(double dt) {
 }
 
 void Hen_top::Draw() {
-    object.DrawBaseXY();
+    if (stair.GiveRoom() != 3)
+    {
+        object.DrawBaseXY();
+    }
     sprite.DrawBaseXY(position);
     sprite.DrawCollisionScope(position.x, Engine::GetWindow().GetSize().y - (position.y), sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
 }

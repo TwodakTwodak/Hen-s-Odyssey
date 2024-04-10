@@ -25,6 +25,7 @@ private:
     //std::vector<Object> objects;
     Object object;
     Stair stair;
+    Object button;
 
     static constexpr double velocity_speed = 200;
 

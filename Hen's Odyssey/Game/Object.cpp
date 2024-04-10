@@ -19,7 +19,6 @@ void Object::Update(double dt) {
 }
 
 void Object::RectChange(){
-    //std::cout << position.x - sprite.GetTextureSize().x/2 << " " << position.y - sprite.GetTextureSize().y/2 << std::endl;
     object_rect = { {position.x + sprite.GetTextureSize().x, Engine::GetWindow().GetSize().y - (position.y + sprite.GetTextureSize().y), Engine::GetWindow().GetSize().y - (position.z + sprite.GetTextureSize().y) },
         {position.x, Engine::GetWindow().GetSize().y - position.y, Engine::GetWindow().GetSize().y - position.z}
     };

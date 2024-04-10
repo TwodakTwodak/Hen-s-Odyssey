@@ -22,6 +22,7 @@ private:
     Hen hen;
     Object object;
     Stair stair;
+    Object button;
 
     bool jumping = false;
     bool going_up = false;
