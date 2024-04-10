@@ -20,6 +20,8 @@ void Hen_top::Load() {
 }
 
 void Hen_top::Update(double dt) {
+    if (room == 1) object.GetObjectMovemence(false);
+    if (room == 2) object.GetObjectMovemence(true);
     position.x=hen.GivePosition().x;
     position.y = hen.GivePosition().y;
     velocity=hen.GiveVelocity();
@@ -301,3 +303,15 @@ void Hen_top::Draw() {
         }
     }
 */
+
+void Hen_top::CheckRoom(int get_room)
+{
+    if (get_room == 1 && room != 2)
+    {
+        room++;
+    }
+    else if (get_room == 2 && room != 1)
+    {
+        room--;
+    }
+}

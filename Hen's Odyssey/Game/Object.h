@@ -13,10 +13,12 @@ public:
     Math::vec2 GivePosition();
     void GetPosition(Math::vec2 get_position);
     Math::ivec2 GiveSize();
+    void GetObjectMovemence(bool characteristic);
     void RectChange();
     bool GiveObjectMovemence();
+    
 private:
     CS230::Sprite sprite;
     Math::rect object_rect;
-    bool moving_object = true;
+    bool moving_object = false;
 };

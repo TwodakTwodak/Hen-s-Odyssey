@@ -35,6 +35,8 @@ void Hen_side::Load() {
 
 
 void Hen_side::Update(double dt) {
+	if (room == 1) object.GetObjectMovemence(false);
+	if (room == 2) object.GetObjectMovemence(true);
 	position.x = hen.GivePosition().x;
 	position.z = hen.GivePosition().z;
 	velocity = hen.GiveVelocity();
@@ -114,4 +116,16 @@ void Hen_side::Draw() {
 	object.DrawBaseXZ();
 	sprite.DrawBaseXZ(position);
 	sprite.DrawCollisionScope(position.x, 600 - (position.z), sprite.GetTextureSize().x, -sprite.GetTextureSize().y);
+}
+
+void Hen_side::CheckRoom(int get_room)
+{
+	if (get_room == 1 && room != 2)
+	{
+		room++;
+	}
+	else if (get_room == 2 && room != 1)
+	{
+		room--;
+	}
 }

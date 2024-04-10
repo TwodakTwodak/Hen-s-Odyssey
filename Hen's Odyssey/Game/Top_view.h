@@ -14,7 +14,7 @@ public:
     void Load();
     void Update(double dt);
     void Draw();
-
+    void CheckRoom(int get_room);
 private:
     CS230::Sprite sprite;
     Collision collision;
@@ -31,4 +31,6 @@ private:
 
     int key[4] = { 0, 0, 0, 0};
     int current_new = -1;
+
+    int room = 1;
 };

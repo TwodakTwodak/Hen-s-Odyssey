@@ -33,6 +33,13 @@ void Mode2::Update(double dt) {
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::R)) {
         Engine::GetGameStateManager().ReloadGameState();
     }
+
+    if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Up)) {
+        hen_top.CheckRoom(1);
+    }
+    if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down)) {
+        hen_top.CheckRoom(2);
+    }
 }
 
 void Mode2::Draw() {

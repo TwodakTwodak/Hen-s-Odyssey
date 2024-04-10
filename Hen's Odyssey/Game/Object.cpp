@@ -57,3 +57,8 @@ bool Object::GiveObjectMovemence()
 {
     return moving_object;
 }
+
+void Object::GetObjectMovemence(bool characteristic)
+{
+    moving_object = characteristic;
+}

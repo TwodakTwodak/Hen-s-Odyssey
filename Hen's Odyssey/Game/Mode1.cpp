@@ -36,7 +36,12 @@ void Mode1::Update([[maybe_unused]] double dt) {
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::R)) {
         Engine::GetGameStateManager().ReloadGameState();
     }
-
+    if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Up)) {
+        hen_side.CheckRoom(1);
+    }
+    if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down)) {
+        hen_side.CheckRoom(2);
+    }
 }
 
 void Mode1::Draw() {

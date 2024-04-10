@@ -22,7 +22,7 @@ public:
     void Load();
     void Update(double dt);
     void Draw();
-
+    void CheckRoom(int get_room);
 private:
     CS230::Sprite sprite;
     Math::vec2 start_position; 
@@ -37,5 +37,5 @@ private:
 
     static constexpr double velocity_speed = 200;
 
-
+    int room = 1;
 };
