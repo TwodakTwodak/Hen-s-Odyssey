@@ -14,6 +14,7 @@ public:
     void CheckRoom(int get_room);
     int GiveRoom();
     void RoomChange(int get_room);
+    void Reset();
 private:
     CS230::Sprite sprite;
     Math::vec2 start_position;

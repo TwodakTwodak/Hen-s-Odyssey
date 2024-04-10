@@ -26,7 +26,6 @@ void Mode1::Load() {
 
 void Mode1::Update([[maybe_unused]] double dt) {
     hen_side.Update(dt);
-    stair.Update(dt);
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::One)) {
         Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Mode2));
     }
@@ -35,7 +34,7 @@ void Mode1::Update([[maybe_unused]] double dt) {
         Engine::GetGameStateManager().ClearNextGameState();
     }
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::R)) {
-        Engine::GetGameStateManager().ReloadGameState();
+        stair.Reset();
     }
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Up)) {
         stair.RoomChange(1);
@@ -43,6 +42,8 @@ void Mode1::Update([[maybe_unused]] double dt) {
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down)) {
         stair.RoomChange(2);
     }
+
+    stair.Update(dt);
 }
 
 void Mode1::Draw() {

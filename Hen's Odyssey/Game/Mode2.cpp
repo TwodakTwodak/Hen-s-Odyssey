@@ -33,7 +33,7 @@ void Mode2::Update(double dt) {
         Engine::GetGameStateManager().SetNextGameState(static_cast<int>(States::Mode1));
     }
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::R)) {
-        Engine::GetGameStateManager().ReloadGameState();
+        stair.Reset();
     }
 
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Up)) {
@@ -42,6 +42,7 @@ void Mode2::Update(double dt) {
     if (Engine::GetInput().KeyJustReleased(CS230::Input::Keys::Down)) {
         stair.RoomChange(2);
     }
+    
 }
 
 void Mode2::Draw() {
