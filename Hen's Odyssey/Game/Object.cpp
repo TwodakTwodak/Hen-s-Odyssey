@@ -9,7 +9,7 @@ Math::vec2 position = { 350, 250, 80 };
 Math::vec2 velocity = { 0, 0, 0 };
 
 void Object::Load() {
-    sprite.Load("Assets/Object.png", { 0, 0, 0 });
+    sprite.Load("Assets/Box.png", { 0, 0, 0 });
     velocity.x = 0;
     velocity.y = 0;
 

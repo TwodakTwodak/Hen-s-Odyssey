@@ -22,6 +22,7 @@ Mode1::Mode1() :
 void Mode1::Load() {
     background.Load("Assets/SideBackground.png");
     hen_side.Load();
+    stair.Load();
 }
 
 void Mode1::Update([[maybe_unused]] double dt) {
@@ -48,8 +49,11 @@ void Mode1::Update([[maybe_unused]] double dt) {
 
 void Mode1::Draw() {
     Engine::GetWindow().Clear(0x00F0F0FF);
-
-    background.DrawBaseXZ({ 0, 0, 0 });
+    if (stair.GiveRoom() != 3)
+    {
+        background.DrawBaseXZ({ 0, 0, 0 });
+        stair.DrawBaseXZ();
+    }
     hen_side.Draw();
 }
 

@@ -17,6 +17,7 @@ void Hen_top::Load() {
     sprite.Load("Assets/TopHen.png", { 0, 0, 0});
     position = hen.GivePosition();
     object.Load();
+    stair.Load();
 }
 
 void Hen_top::Update(double dt) {
@@ -26,6 +27,7 @@ void Hen_top::Update(double dt) {
     position.x=hen.GivePosition().x;
     position.y = hen.GivePosition().y;
     velocity=hen.GiveVelocity();
+    stair.RectChange();
     if (Engine::GetInput().KeyJustPressed(CS230::Input::Keys::D)) //3
     {
         current_new = 3;
@@ -141,13 +143,13 @@ void Hen_top::Update(double dt) {
         velocity.y = 0;
     }
 
-    for (int i = 0; i <= 800 /100; i++)
+    for (int i = 0; i <= 1280 /100; i++)
     {
-        DrawLine(i * 100, 0, i * 100, 600, WHITE);
+        DrawLine(i * 100, 0, i * 100, 720, WHITE);
     }
-    for (int j = 0; j <= 600 / 100; j++)
+    for (int j = 0; j <= 720 / 100; j++)
     {
-        DrawLine(0, j * 100, 800, j * 100, WHITE);
+        DrawLine(0, j * 100, 1280, j * 100, WHITE);
     }
     
     double vx = velocity.x * dt;
@@ -289,6 +291,10 @@ void Hen_top::Update(double dt) {
     if (hen_move)
     {
         position += velocity * dt;
+    }
+    if (collision.CollisionCheck(hen.PreGiveCollisionRect(), stair.GiveCollisionRect()))
+    {
+        stair.RoomChange(1);
     }
     
     hen.GetPosition(position);

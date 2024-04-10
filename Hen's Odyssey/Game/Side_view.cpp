@@ -27,6 +27,7 @@ Hen_side::Hen_side(Math::vec2 start_position) :
 void Hen_side::Load() {
     sprite.Load("Assets/SideHen.png", { 0, 0, 0 });
 	object.Load();
+	stair.Load();
 	velocity.x = 0;
 	velocity.y = 0;
 	velocity.z = 0;
@@ -44,6 +45,7 @@ void Hen_side::Update(double dt) {
 	velocity = hen.GiveVelocity();
 	hen.RectChange(sprite.GetTextureSize());
 	object.RectChange();
+	stair.RectChange();
 	if (Engine::GetInput().KeyDown(CS230::Input::Keys::D)) {
 		velocity.x = velocity_speed;
 	}
@@ -105,7 +107,6 @@ void Hen_side::Update(double dt) {
 				if (position.x + sprite.GetTextureSize().x < object.GivePosition().x + object.GiveSize().x / 2)
 				{
 					object.GetPosition({ position.x + sprite.GetTextureSize().x, object.GivePosition().y , object.GivePosition().z });
-
 				}
 				else
 				{
@@ -120,7 +121,6 @@ void Hen_side::Update(double dt) {
 			if (position.x + sprite.GetTextureSize().x < object.GivePosition().x + object.GiveSize().x / 2)
 			{
 				position.x = object.GivePosition().x - sprite.GetTextureSize().x;
-
 			}
 			else
 			{
@@ -161,6 +161,10 @@ void Hen_side::Update(double dt) {
 		position.z += velocity.z * dt;
 	}
 	
+	if (collision.CollisionCheck(hen.PreGiveCollisionRect(), stair.GiveCollisionRect()))
+	{
+		stair.RoomChange(1);
+	}
 	
 	hen.GetPosition(position);
 	hen.GetVelocity(velocity);

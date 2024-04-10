@@ -19,6 +19,7 @@ Mode2::Mode2() : hen_top({ 0, 0, 0}), object() { }
 void Mode2::Load() {
     background.Load("Assets/TopGroundGrass.png");
     hen_top.Load();
+    stair.Load();
 }
 
 void Mode2::Update(double dt) {
@@ -46,10 +47,13 @@ void Mode2::Update(double dt) {
 }
 
 void Mode2::Draw() {
-    Engine::GetWindow().Clear(0x000000FF);
-    background.DrawBaseXY({ 0, 0, 0 });
+    Engine::GetWindow().Clear(0x00F0F0FF);
+    if (stair.GiveRoom() != 3)
+    {
+        background.DrawBaseXY({ 0, 0, 0 });
+        stair.DrawBaseXY();
+    }    
     hen_top.Draw();
-    
 }
 
 void Mode2::Unload() { }
