@@ -35,4 +35,5 @@ private:
     int room = 1;
 
     bool hen_move = true;
+    bool object_move = true;
 };
