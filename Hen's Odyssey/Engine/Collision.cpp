@@ -3,7 +3,7 @@
 bool Collision::CollisionCheck(Math::rect r1, Math::rect r2)
 {
 	//if there is a error, change y pos
-	if ((r1.bottom_left.x > r2.top_right.x && r1.top_right.x < r2.bottom_left.x) && r1.top_right.y>r2.bottom_left.y && r1.bottom_left.y<r2.top_right.y)
+	if ((r1.bottom_left.x > r2.top_right.x && r1.top_right.x < r2.bottom_left.x) && (r1.top_right.y > r2.bottom_left.y && r1.bottom_left.y < r2.top_right.y) && (r1.top_right.z > r2.bottom_left.z && r1.bottom_left.z < r2.top_right.z))
 	{
 		return true;
 	}
