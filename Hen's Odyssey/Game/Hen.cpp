@@ -27,7 +27,7 @@ Math::vec2 Hen::GivePosition()
 void Hen::RectChange(Math::ivec2 hen_size)
 {
 	collision_rect = { 
-		{hen_position.x + hen_size.x, Engine::GetWindow().GetSize().y - (hen_position.y+ hen_size.y), Engine::GetWindow().GetSize().y - (hen_position.z + hen_size.z) },
+		{hen_position.x + hen_size.x, Engine::GetWindow().GetSize().y - (hen_position.y+ hen_size.y), Engine::GetWindow().GetSize().y - (hen_position.z + hen_size.y) },
 		{hen_position.x, Engine::GetWindow().GetSize().y - hen_position.y, Engine::GetWindow().GetSize().y - hen_position.z},
 	};
 }
@@ -35,7 +35,7 @@ void Hen::RectChange(Math::ivec2 hen_size)
 void Hen::PreRectChange(Math::ivec2 hen_size, double x, double y, double z)
 {
 	pre_collision_rect = {
-		{hen_position.x+x + hen_size.x , Engine::GetWindow().GetSize().y - (hen_position.y + hen_size.y +y), Engine::GetWindow().GetSize().y - (hen_position.z + hen_size.z+ z) },
+		{hen_position.x+x + hen_size.x , Engine::GetWindow().GetSize().y - (hen_position.y + hen_size.y +y), Engine::GetWindow().GetSize().y - (hen_position.z + hen_size.y+ z) },
 		{hen_position.x+x , Engine::GetWindow().GetSize().y - (hen_position.y +y), Engine::GetWindow().GetSize().y - (hen_position.z+z)},
 	};
 }

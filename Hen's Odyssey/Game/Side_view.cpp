@@ -40,8 +40,7 @@ void Hen_side::Load() {
 void Hen_side::Update(double dt) {
 	hen_move = true;
 	object.GetObjectMovemence(false);
-	position.x = hen.GivePosition().x;
-	position.z = hen.GivePosition().z;
+	position= hen.GivePosition();
 	velocity = hen.GiveVelocity();
 	hen.RectChange(sprite.GetTextureSize());
 	object.RectChange();
