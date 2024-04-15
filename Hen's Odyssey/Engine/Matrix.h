@@ -11,36 +11,36 @@ Created:    March 8, 2023
 #pragma once
 #include "Vec2.h"
 
-
 namespace Math {
     class TransformationMatrix {
     public:
         TransformationMatrix();
 
         const double* operator[](int index) const { return matrix[index]; }
-        TransformationMatrix operator * (TransformationMatrix m) const;
-        TransformationMatrix& operator *= (TransformationMatrix m);
-        Math::vec2 operator*(vec2 v) const;
+        TransformationMatrix operator * (const TransformationMatrix& m) const;
+        TransformationMatrix& operator *= (const TransformationMatrix& m);
+        Math::vec2 operator*(const vec2& v) const;
         void Reset();
     protected:
-        double matrix[3][3];
+        double matrix[4][4];
     };
+
     class TranslationMatrix : public TransformationMatrix {
     public:
         TranslationMatrix(const Math::vec2& translation);
-        TranslationMatrix(const  Math::ivec2& translation);
+        TranslationMatrix(const Math::ivec2& translation);
     };
+
     class ScaleMatrix : public TransformationMatrix {
     public:
         ScaleMatrix(double scale);
         ScaleMatrix(vec2 scale);
     };
 
-
     class RotationMatrix : public TransformationMatrix {
     public:
         RotationMatrix(double theta);
     };
-
 }
+
 

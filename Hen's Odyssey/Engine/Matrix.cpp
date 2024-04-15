@@ -6,74 +6,76 @@ File Name:  Matrix.h
 Project:    CS230 Engine
 Author:     Jonathan Holmes, Jiyun Seok
 Created:    March 8, 2023
-*/
-#include "Matrix.h"
-#include "cmath"
+*/#include "Matrix.h"
+#include <cmath>
 
-Math::TransformationMatrix::TransformationMatrix() {
+using namespace Math;
+
+TransformationMatrix::TransformationMatrix() {
     Reset();
 }
 
-
-void Math::TransformationMatrix::Reset() {
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
+void TransformationMatrix::Reset() {
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
             matrix[i][j] = (i == j) ? 1.0 : 0.0;
         }
     }
 }
 
-
-
-Math::TransformationMatrix Math::TransformationMatrix::operator * (TransformationMatrix m) const {
+TransformationMatrix TransformationMatrix::operator * (const TransformationMatrix& m) const {
     TransformationMatrix result;
 
-    result.matrix[0][0] = matrix[0][0] * m[0][0] + matrix[0][1] * m[1][0] + matrix[0][2] * m[2][0];
-    result.matrix[0][1] = matrix[0][0] * m[0][1] + matrix[0][1] * m[1][1] + matrix[0][2] * m[2][1];
-    result.matrix[0][2] = matrix[0][0] * m[0][2] + matrix[0][1] * m[1][2] + matrix[0][2] * m[2][2];
-    result.matrix[1][0] = matrix[1][0] * m[0][0] + matrix[1][1] * m[1][0] + matrix[1][2] * m[2][0];
-    result.matrix[1][1] = matrix[1][0] * m[0][1] + matrix[1][1] * m[1][1] + matrix[1][2] * m[2][1];
-    result.matrix[1][2] = matrix[1][0] * m[0][2] + matrix[1][1] * m[1][2] + matrix[1][2] * m[2][2];
-    result.matrix[2][0] = matrix[2][0] * m[0][0] + matrix[2][1] * m[1][0] + matrix[2][2] * m[2][0];
-    result.matrix[2][1] = matrix[2][0] * m[0][1] + matrix[2][1] * m[1][1] + matrix[2][2] * m[2][1];
-    result.matrix[2][2] = matrix[2][0] * m[0][2] + matrix[2][1] * m[1][2] + matrix[2][2] * m[2][2];
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            result.matrix[i][j] = matrix[i][0] * m.matrix[0][j] +
+                matrix[i][1] * m.matrix[1][j] +
+                matrix[i][2] * m.matrix[2][j] +
+                matrix[i][3] * m.matrix[3][j];
+        }
+    }
 
     return result;
 }
 
-Math::TransformationMatrix& Math::TransformationMatrix::operator *= (Math::TransformationMatrix m) {
+TransformationMatrix& TransformationMatrix::operator *= (const TransformationMatrix& m) {
     (*this) = (*this) * m;
     return (*this);
 }
 
-Math::vec2 Math::TransformationMatrix::operator * (vec2 v) const {
-    Math::vec2 result;
-    result.x = matrix[0][0] * v.x + matrix[0][1] * v.y + matrix[0][2];
-    result.y = matrix[1][0] * v.x + matrix[1][1] * v.y + matrix[1][2];
+vec2 TransformationMatrix::operator * (const vec2& v) const {
+    vec2 result;
+    result.x = matrix[0][0] * v.x + matrix[0][1] * v.y + matrix[0][2] * v.z + matrix[0][3];
+    result.y = matrix[1][0] * v.x + matrix[1][1] * v.y + matrix[1][2] * v.z + matrix[1][3];
+    result.z = matrix[2][0] * v.x + matrix[2][1] * v.y + matrix[2][2] * v.z + matrix[2][3];
     return result;
 }
 
-Math::TranslationMatrix::TranslationMatrix(const Math::vec2& translation) {
-
-    matrix[0][2] = translation.x;
-    matrix[1][2] = translation.y;
+TranslationMatrix::TranslationMatrix(const vec2& translation) {
+    matrix[0][3] = translation.x;
+    matrix[1][3] = translation.y;
+    matrix[2][3] = translation.z;
 }
 
-Math::TranslationMatrix::TranslationMatrix(const Math::ivec2& translation) {
-    matrix[0][2] = static_cast<double>(translation.x);
-    matrix[1][2] = static_cast<double>(translation.y);
+TranslationMatrix::TranslationMatrix(const ivec2& translation) {
+    matrix[0][3] = static_cast<double>(translation.x);
+    matrix[1][3] = static_cast<double>(translation.y);
+    matrix[2][3] = static_cast<double>(translation.z);
 }
-Math::ScaleMatrix::ScaleMatrix(double scale) {
+
+ScaleMatrix::ScaleMatrix(double scale) {
     matrix[0][0] = scale;
     matrix[1][1] = scale;
+    matrix[2][2] = scale;
 }
 
-Math::ScaleMatrix::ScaleMatrix(vec2 scale) {
+ScaleMatrix::ScaleMatrix(vec2 scale) {
     matrix[0][0] = scale.x;
     matrix[1][1] = scale.y;
+    matrix[2][2] = scale.z;
 }
 
-Math::RotationMatrix::RotationMatrix(double theta) {
+RotationMatrix::RotationMatrix(double theta) {
     double cosTheta = cos(theta);
     double sinTheta = sin(theta);
 
