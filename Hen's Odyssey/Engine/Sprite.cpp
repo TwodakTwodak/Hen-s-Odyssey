@@ -1,6 +1,7 @@
  #include "Engine.h"
 #include "Sprite.h"
 #include <iostream>
+#include "TextureManager.h" 
 
 CS230::Sprite::Sprite():hotspot(0, 0, 0) { }
 
@@ -34,4 +35,7 @@ void CS230::Sprite::DrawCollisionScope(double x, double y, double width, double 
 
 Math::ivec2 CS230::Sprite::GetTextureSize() {
     return { texture.GetSize().x, texture.GetSize().y, texture.GetSize().z };
+}
+void CS230::Sprite::Draw(Math::TransformationMatrix display_matrix) {
+    texture->Draw(display_matrix * Math::TranslationMatrix(-GetHotSpot(0)), GetFrameTexel(animations[current_animation]->CurrentFrame()), GetFrameSize());
 }

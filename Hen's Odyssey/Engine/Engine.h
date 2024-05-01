@@ -9,6 +9,7 @@
 #include <chrono>
 #include <time.h>
 #include "Vec2.h"
+#include "TextureManager.h"
 
 class Engine {
 public:
@@ -32,7 +33,9 @@ public:
     static CS230::Input& GetInput() {
         return Instance().input;
     }
-
+    static CS230::TextureManager& GetTextureManager() {
+        return Instance().TextureManager;
+    }
 
 
     void Start(std::string window_title);
@@ -42,7 +45,8 @@ public:
 
 private:
     Engine();
-    CS230::GameStateManager gamestatemanager;
+    CS230::GameStateManager gamestatemanager;    
+    CS230::TextureManager TextureManager;
     CS230::Logger logger;
     CS230::Window window;
     CS230::Input input;
